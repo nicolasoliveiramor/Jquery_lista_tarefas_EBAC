@@ -13,26 +13,26 @@ $(document).ready(function(){
                                 </li>
                         `);
 
-                        novoTarefa.appendTo('#lista-tarefas');
-                        $('#lista-tarefas').css('border-bottom', '2px solid black');
-                        $('.lista').css('visibility', 'visible').css('border', '2px solid black');
-                        
-                        $('#tarefa').val('');
-                        $('#data-tarefa').val('');
+                        novoTarefa.appendTo('#lista-tarefas')
+                        $('#lista-tarefas').css('border-bottom', '2px solid black')
+                        $('.lista').css('visibility', 'visible').css('border', '2px solid black')
+
+                        $('#tarefa').val('')
+                        $('#data-tarefa').val('')
                 }
         });
                 
                 $('#lista-tarefas').on('click', '.verificar', function() {
-                        $(this).siblings('span').toggleClass('checked');
+                        $(this).siblings('span').toggleClass('checked')
                 })
 
                 $('#lista-tarefas').on('click', '.limpar', function() {
-                        $(this).parent().remove();
-                        checkListEmpty(); // Verifica se a lista está vazia após remover
+                        $(this).parent().remove()
+                        checkListEmpty() // Verifica se a lista está vazia após remover
                 })
 
                 $('form').on('reset', function() {
-                $('#lista-tarefas').empty();
+                $('#lista-tarefas').empty()
                 $('#lista-tarefas').css('border', 'none')
                 checkListEmpty() // Verifica se a lista está vazia após limpar tudo
         })
