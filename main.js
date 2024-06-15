@@ -4,45 +4,43 @@ $(document).ready(function(){
                 const tarefa = $('#tarefa').val()
                 const horaTarefa = $('#data-tarefa').val()
                 
-                const novoTarefa = $(`
-                        <li>
+                if (tarefa.trim() !== '') {
+                        const novoTarefa = $(`
+                                <li>
                                 <span>${tarefa} - ${horaTarefa}</span>
                                 <button class='verificar'>Feito</button>
                                 <button class='limpar'>Limpar</button>
-                        </li>
-                        `)
+                                </li>
+                        `);
+
+                        novoTarefa.appendTo('#lista-tarefas');
+                        $('#lista-tarefas').css('border-bottom', '2px solid black');
+                        $('.lista').css('visibility', 'visible').css('border', '2px solid black');
                         
-                novoTarefa.appendTo('#lista-tarefas')
+                        $('#tarefa').val('');
+                        $('#data-tarefa').val('');
+                }
+        });
+                
+                $('#lista-tarefas').on('click', '.verificar', function() {
+                        $(this).siblings('span').toggleClass('checked');
+                })
 
-                $('#lista-tarefas').css('border-bottom', '2px solid black')
-                $('.lista').css('visibility', 'visible')
-                $('.lista').css('border-top','2px solid black')
-                $('.lista').css('border-right','2px solid black')
-                $('.lista').css('border-left','2px solid black')
+                $('#lista-tarefas').on('click', '.limpar', function() {
+                        $(this).parent().remove();
+                        checkListEmpty(); // Verifica se a lista está vazia após remover
+                })
 
-                $('#tarefa').val('')
-                $('#data-tarefa').val('')
-
-        })
-
-        $('#lista-tarefas').on('click', '.verificar', function(){
-                $(this).siblings('span').toggleClass('checked')
-        })
-        
-        $('#lista-tarefas').on('click', '.limpar', function(){
-                $(this).parent().remove()
-        })
-
-        if ($('#lista-tarefas').children().length === 0) {
+                $('form').on('reset', function() {
+                $('#lista-tarefas').empty();
                 $('#lista-tarefas').css('border', 'none')
+                checkListEmpty() // Verifica se a lista está vazia após limpar tudo
+        })
+
+        // Função para verificar se a lista está vazia e ajustar a visibilidade e bordas
+        function checkListEmpty() {
+                if ($('#lista-tarefas').children().length === 0) {
+                        $('.lista').css('visibility', 'hidden').css('border', 'none')
+                }
         }
-
-        
-        $('form').on('reset', function(){
-                $('.lista').empty()
-                $('.lista').css('border', 'none')
-                $('#lista-tarefas').empty()
-                $('#lista-tarefas').css('border', 'none')
-        })
-        
 })
